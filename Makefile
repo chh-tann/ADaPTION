@@ -199,7 +199,7 @@ ifeq ($(USE_OPENCV), 1)
 	endif
 		
 endif
-PYTHON_LIBRARIES ?= boost_python python2.7
+PYTHON_LIBRARIES ?= boost_python-py35 python3.5m
 WARNINGS := -Wall -Wno-sign-compare
 
 ##############################
@@ -514,7 +514,7 @@ $(MAT$(PROJECT)_SO): $(MAT$(PROJECT)_SRC) $(STATIC_NAME)
 		exit 1; \
 	fi
 	@ echo MEX $<
-	$(Q)$(MATLAB_DIR)/bin/mex $(MAT$(PROJECT)_SRC) \
+	$(Q)$(MATLAB_DIR)/bin/mex -I$(MEXPLUS_DIR) $(MAT$(PROJECT)_SRC) \
 			CXX="$(CXX)" \
 			CXXFLAGS="\$$CXXFLAGS $(MATLAB_CXXFLAGS)" \
 			CXXLIBS="\$$CXXLIBS $(STATIC_LINK_COMMAND) $(LDFLAGS)" -output $@
